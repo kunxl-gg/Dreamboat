@@ -23,19 +23,18 @@ Welcome to the LangChain Chatbot repository! This chatbot has been designed usin
    ```bash
    git clone git@github.com:your_username/langchain-chatbot.git
    ```
-
-2. **Navigate to the Project Directory**
-   
-   ```bash
-   cd langchain-chatbot
-   ```
-
-3. **Install the Dependencies**
+2. **Install the Dependencies**
 
    Install the required packages using the `requirements.txt` file:
 
    ```bash
    pip install -r requirements.txt
+   ``` 
+
+3. **Navigate to the Project Directory**
+   
+   ```bash
+   cd langchain-chatbot
    ```
 
 ## Setting Up the Environment
