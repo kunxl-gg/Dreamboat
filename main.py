@@ -6,9 +6,15 @@ from langchain.llms import OpenAI
 from langchain.memory import ConversationSummaryMemory
 from langchain.prompts import ChatPromptTemplate, SystemMessagePromptTemplate, HumanMessagePromptTemplate, MessagesPlaceholder
 from langchain.chains import ConversationalRetrievalChain
+import dotenv
+import os
+
+# Load API key
+dotenv.load_dotenv()
+api_key = os.getenv("OPENAI_API_KEY")
 
 # LLM
-llm = OpenAI()
+llm = OpenAI(openai_api_key=api_key)
 
 # Document loader
 loader = TextLoader('./state_of_the_union.txt', encoding="utf-8")
@@ -25,18 +31,6 @@ retriever = vectorstore.as_retriever()
 
 # Memory
 memory = ConversationSummaryMemory(llm=llm, return_messages=True, memory_key="chat_history")
-
-# Prompt
-prompt = ChatPromptTemplate(
-    messages=[
-        SystemMessagePromptTemplate.from_template(
-            "You are a nice chatbot having a conversation with a human."
-        ),
-        # The `variable_name` here is what must align with memory
-        MessagesPlaceholder(variable_name="chat_history"),
-        HumanMessagePromptTemplate.from_template("{question}")
-    ]
-)
 
 # final Chain
 chain = ConversationalRetrievalChain.from_llm(llm, retriever=retriever, memory=memory)
