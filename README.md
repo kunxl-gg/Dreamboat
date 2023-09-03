@@ -1,4 +1,3 @@
-Certainly! Here's a sample `README.md` file for your chatbot:
 
 ---
 
@@ -77,5 +76,3 @@ If you'd like to contribute to the LangChain Chatbot, please fork this repositor
 This project is licensed under the MIT License. See `LICENSE` for details.
 
 ---
-
-Feel free to customize this template according to your project's specific details and needs.
