@@ -1,21 +1,22 @@
 import os
 import openai
+from dotenv import load_dotenv
+
+# loading the env file
+load_dotenv()
 
 # importing the env key
-api_key = os.getenv("OPENAI_API_KEY")
+openai.api_key = os.environ.get("OPENAI_API_KEY")
 
-# fine tun the model
-openai.FineTune.create( 
-    training_file="data.json",
-    model="GPT-3.5-turbo", 
+# upload the file for fine-tuning
+file = openai.File.create(file=open("data.jsonl"), purpose="fine-tune")
+
+print(file)
+
+# # fine-tuning the actual model
+model = openai.FineTuningJob.create( 
+    training_file=file['id'],
+    model ="gpt-3.5-turbo"
 )
 
-# get the completion
-completion = openai.ChatCompletion.create( 
-    model="GPT-3.5-turbo",
-    messages=[ 
-    {"role": "system", "content": "You are a chatbot who is good with puns."},
-    {"role": "user", "content": ""}
-    ]
-)
-
+# waiting for the model to be trained
