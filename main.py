@@ -20,3 +20,9 @@ model = openai.FineTuningJob.create(
 )
 
 # waiting for the model to be trained
+model = openai.FineTuningJob.retrieve(model['id'])
+
+# printing the model
+print(model)
+
+# creating the completion
